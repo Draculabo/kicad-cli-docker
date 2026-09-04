@@ -43,7 +43,7 @@ RUN apt-get update && \
 WORKDIR /src
 
 RUN set -ex;            \
-    git clone -b cli/10.0  --depth 1 https://gitlab.com/Liangtie/kicad.git; \
+    git clone -b feat/export-specctra-dsn --depth 1 https://gitlab.com/Draculabo/kicad.git; \
     git clone --depth 1  https://github.com/liangtie/meshoptimizer.git
 
 WORKDIR /src/meshoptimizer
@@ -154,6 +154,9 @@ ENV LC_ALL en_US.UTF-8
 
 COPY --from=build /usr/installtemp/bin /usr/bin
 COPY --from=build /usr/installtemp/share /usr/share
+# KICAD_DATA is configured as the absolute path /usr/share/kicad, so CMake's
+# --prefix override above does not stage these runtime files in installtemp.
+COPY --from=build /usr/share/kicad /usr/share/kicad
 COPY --from=build /usr/installtemp/lib /usr/lib
 
 # fix the linkage to libkicad_3dsg
