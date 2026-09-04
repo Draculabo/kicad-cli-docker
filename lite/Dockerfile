@@ -43,7 +43,7 @@ RUN apt-get update && \
 WORKDIR /src
 
 RUN set -ex;            \
-    git clone -b feat/export-specctra-dsn --depth 1 https://gitlab.com/Draculabo/kicad.git; \
+    git clone -b feat/add_local_copilot --depth 1 https://gitlab.com/Draculabo/kicad.git; \
     git clone --depth 1  https://github.com/liangtie/meshoptimizer.git
 
 WORKDIR /src/meshoptimizer
